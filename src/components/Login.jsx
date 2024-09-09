@@ -18,6 +18,8 @@ const Login = ({oldUser, setOldUser}) => {
   const [phone, setPhone] = useState(null);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isDisable, setIsDisable] = useState(true);
+  const [emailValid, setEmailValid] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
@@ -51,7 +53,9 @@ const Login = ({oldUser, setOldUser}) => {
   useEffect(() => {
     // Validate email and password (password must have at least 8 characters, including a capital letter, a small letter, a symbol, and a number)
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    setEmailValid(emailValid);
     const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}$/.test(phone); 
+    setPasswordValid(passwordValid);
     
     setIsDisable(!(emailValid && passwordValid));
   }, [email, phone]);
@@ -83,7 +87,7 @@ const Login = ({oldUser, setOldUser}) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <FaCheckCircle className="text-xl text-green-500 absolute right-3" />
+                <FaCheckCircle className={`text-xl ${emailValid?'text-green-500':'text-red-500'} absolute right-3`} />
               </div>
             </div>
                 
@@ -100,7 +104,7 @@ const Login = ({oldUser, setOldUser}) => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                 />
-                {isPasswordVisible?<FaEye className="text-xl text-green-500 absolute right-3" onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />:<FaEyeSlash className="text-xl text-green-500 absolute right-3" onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />}
+                {isPasswordVisible?<FaEye className={`text-xl ${passwordValid?'text-green-500':'text-red-500'} absolute right-3`} onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />:<FaEyeSlash className={`text-xl ${passwordValid?'text-green-500':'text-red-500'} absolute right-3`} onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />}
               </div>
             </div>
               </div>
@@ -132,6 +136,9 @@ const Register = ({oldUser, setOldUser}) => {
   const [phone, setPhone] = useState(null);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isDisable, setIsDisable] = useState(true);
+  const [emailValid, setEmailValid] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(false);
+  const [usernameValid, setUsernameValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();  
@@ -162,8 +169,12 @@ const Register = ({oldUser, setOldUser}) => {
   useEffect(() => {
     // Validate email, username, and password (password must have at least 8 characters, including a capital letter, a small letter, a symbol, and a number)
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    setEmailValid(emailValid);
     const usernameValid = username?.length > 0;
-    const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}$/.test(phone);    
+    setUsernameValid(usernameValid);
+    const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}$/.test(phone); 
+    setPasswordValid(passwordValid);   
+
     setIsDisable(!(emailValid && usernameValid && passwordValid));
   }, [email, username, phone]);
 
@@ -196,7 +207,7 @@ const Register = ({oldUser, setOldUser}) => {
       value={username}
       onChange={(e) => setUsername(e.target.value)}
     />
-    <FaCheckCircle className="text-xl text-green-500 absolute right-3" />
+    <FaCheckCircle className={`text-xl ${usernameValid?'text-green-500':'text-red-500'} absolute right-3`} />
   </div>
 </div>
 
@@ -214,7 +225,7 @@ const Register = ({oldUser, setOldUser}) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <FaCheckCircle className="text-xl text-green-500 absolute right-3" />
+                <FaCheckCircle className={`text-xl ${emailValid?'text-green-500':'text-red-500'} absolute right-3`} />
               </div>
             </div>
                 
@@ -231,7 +242,7 @@ const Register = ({oldUser, setOldUser}) => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                 />
-                {isPasswordVisible?<FaEye className="text-xl text-green-500 absolute right-3" onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />:<FaEyeSlash className="text-xl text-green-500 absolute right-3" onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />}
+                {isPasswordVisible?<FaEye className={`text-xl ${passwordValid?'text-green-500':'text-red-500'} absolute right-3`} onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />:<FaEyeSlash className={`text-xl ${passwordValid?'text-green-500':'text-red-500'} absolute right-3`} onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />}
               </div>
             </div>
               </div>
