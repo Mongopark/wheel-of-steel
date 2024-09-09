@@ -419,6 +419,8 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
         alert("Maximum of 8 characters allowed.");
       } else if (items.length > 7) {
         alert("Maximum of 8 Items allowed.");
+      }else {
+        alert("Maximum of 8 Items and characters allowed.");
       }
     }
   };
@@ -555,6 +557,8 @@ function Setting({ items, setItems, wheelColor, setWheelColor, fontColor, setFon
         alert("Maximum of 8 characters allowed.");
       } else if (items.length > 7) {
         alert("Maximum of 8 Items allowed.");
+      }else {
+        alert("Maximum of 8 Items and characters allowed.");
       }
     }
   };
