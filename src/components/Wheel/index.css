@@ -2,7 +2,7 @@
 @media only screen and (max-width: 400px) {
   :root {
     --wheel-font: "Lato", "Quicksand", sans-serif;
-    --wheel-size: 350px;
+    --wheel-size: 300px;
     --wheel-slice-spacing: 25px;
     --wheel-border-size: 5px;
     --wheel-color: green;
@@ -241,6 +241,7 @@
 }
 
 /* Roue */
+/* Center the wheel and ensure the items are rotated correctly */
 .wheel {
   display: block;
   position: relative;
@@ -253,9 +254,10 @@
   border: solid var(--wheel-color) var(--wheel-border-size);
   background-color: var(--wheel-color);
   transition: transform var(--reset-duration);
-  transform: rotate(0deg);
+  transform: rotate(0deg);  /* Start with no rotation */
   cursor: pointer;
 }
+
 
 .wheel.spinning {
   transition: transform var(--spinning-duration);
@@ -282,7 +284,6 @@
   border-radius: 50%;
 }
 
-
 .wheel-item {
   display: block;
   position: absolute;
@@ -290,17 +291,17 @@
   top: 50%;
   left: 50%;
   width: 50%;
-  transform-origin: center left;
+  transform-origin: center left;  /* Ensure correct rotation origin */
   transform: translateY(-50%) rotate(calc(var(--item-nb) * (360deg / var(--nb-item))));
-  text-align: right;
-  padding: 0 25px 0 50px;
+  text-align: right;  /* Keep text aligned to the right */
+  padding: 0 20px 0 60px;  /* Adjust padding to bring text closer to the center */
   font-family: var(--wheel-font);
-  font-size: var(--font-size);  
-  height: calc(11% * var(--nb-value));
+  font-size: var(--font-size);
+  height: calc(11% * var(--nb-value));  /* This controls the height of each slice */
   justify-content: center;
   align-content: center;
-  overflow: wrap;
-  clip-path: polygon(100% 100%, 0% 50%, 120% -15% );
+  overflow: hidden;  /* Ensure no overflow */
+  clip-path: polygon(100% 100%, 0% 50%, 120% -15% );  /* Adjust clipping to prevent text skewing */
 }
 
 .wheel-item:before {
