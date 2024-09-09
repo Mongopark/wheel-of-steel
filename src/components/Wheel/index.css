@@ -10,7 +10,7 @@
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
-    --mis-fit: 50;
+    --mis-fit: 90;
     --good-fit: 0;
     --item-nb: 0;
     --selected-item: 0;
@@ -32,7 +32,7 @@
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
-    --mis-fit: 40;
+    --mis-fit: 80;
     --good-fit: 10;
     --item-nb: 0;
     --selected-item: 0;
@@ -54,8 +54,8 @@
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
-    --mis-fit: 35;
-    --good-fit: 15;
+    --mis-fit: 70;
+    --good-fit: 20;
     --item-nb: 0;
     --selected-item: 0;
     --nb-turn: 5;
@@ -76,8 +76,8 @@
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
-    --mis-fit: 30;
-    --good-fit: 20;
+    --mis-fit: 60;
+    --good-fit: 30;
     --item-nb: 0;
     --selected-item: 0;
     --nb-turn: 5;
@@ -98,8 +98,8 @@
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
-    --mis-fit: 25;
-    --good-fit: 25;
+    --mis-fit: 50;
+    --good-fit: 40;
     --item-nb: 0;
     --selected-item: 0;
     --nb-turn: 5;
@@ -119,8 +119,8 @@
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
-    --mis-fit: 20;
-    --good-fit: 30;
+    --mis-fit: 40;
+    --good-fit: 50;
     --item-nb: 0;
     --selected-item: 0;
     --nb-turn: 5;
@@ -144,8 +144,8 @@
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
-    --mis-fit: 15;
-    --good-fit: 35;
+    --mis-fit: 30;
+    --good-fit: 60;
     --item-nb: 0;
     --selected-item: 0;
     --nb-turn: 5;
@@ -168,8 +168,8 @@
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
-    --mis-fit: 10;
-    --good-fit: 40;
+    --mis-fit: 20;
+    --good-fit: 70;
     --item-nb: 0;
     --selected-item: 0;
     --nb-turn: 5;
@@ -189,8 +189,8 @@
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
-    --mis-fit: 5;
-    --good-fit: 45;
+    --mis-fit: 10;
+    --good-fit: 80;
     --item-nb: 0;
     --selected-item: 0;
     --nb-turn: 5;
@@ -211,7 +211,7 @@
     --nb-item: 0;
     --nb-value: 0;
     --mis-fit: 0;
-    --good-fit: 50;
+    --good-fit: 90;
     --item-nb: 0;
     --selected-item: 0;
     --nb-turn: 5;

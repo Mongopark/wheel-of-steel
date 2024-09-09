@@ -108,12 +108,12 @@ Wheel.propTypes = {
 // Define default prop values
 Wheel.defaultProps = {
   items: [
-    "30% SITEWIDE OFF",
-    "BUY 1 GET 1 FREE",
-    "PURCHASE WORTH 1000+",
-    "BUY 2 EFFERVESCENT",
-    "50G TEA OF RS. 500",
-    "HOT CHOCOLATE TEA",
+    "SITEWIDE",
+    "BUYFREE",
+    "PURCHASE",
+    "EFFERVESCENT",
+    "50GTEARS",
+    "HOTCHOCOLATE",
   ],
   colors: ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"], // Default colors
 };

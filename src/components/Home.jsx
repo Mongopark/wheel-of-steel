@@ -49,12 +49,12 @@ function Home() {
   const [items, setItems] = useState(() => {
     const value = window.localStorage.getItem("itemsList");
     return value !== null ? JSON.parse(value) : [
-      "30% SITEWIDE OFF",
-    "BUY 1 GET 1 FREE",
-    "PURCHASE WORTH 1000+",
-    "BUY 2 EFFERVESCENT",
-    "50G TEA OF RS. 500",
-    "HOT CHOCOLATE TEA",
+      "SITEWIDE",
+      "BUYFREE",
+      "PURCHASE",
+      "EFFERVESCENT",
+      "50GTEARS",
+      "HOTCHOCOLATE",
     ];
   });
 
@@ -419,22 +419,25 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
 
   const resetAll = () => {
     const defaultItems = [
-      "30% SITEWIDE OFF",
-    "BUY 1 GET 1 FREE",
-    "PURCHASE WORTH 1000+",
-    "BUY 2 EFFERVESCENT",
-    "50G TEA OF RS. 500",
-    "HOT CHOCOLATE TEA",
+      "SITEWIDE",
+      "BUYFREE",
+      "PURCHASE",
+      "EFFERVESCENT",
+      "50GTEARS",
+      "HOTCHOCOLATE",
     ];
-    const defaultColors = ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"];
+    const defaultColors = ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"];  
+    const defaultFontColor = "#000000";
   
     // Reset the items and colors
     setItems(defaultItems);
     setColors(defaultColors);
+    setFontColor(defaultFontColor);
   
     // Store the defaults in localStorage correctly
     window.localStorage.setItem("itemsList", JSON.stringify(defaultItems));
     window.localStorage.setItem("colorsList", JSON.stringify(defaultColors));
+    window.localStorage.setItem("fontColor", "#000000");
   };
 
 
@@ -547,22 +550,25 @@ function Setting({ items, setItems, wheelColor, setWheelColor, fontColor, setFon
 
   const resetAll = () => {
     const defaultItems = [
-      "30% SITEWIDE OFF",
-    "BUY 1 GET 1 FREE",
-    "PURCHASE WORTH 1000+",
-    "BUY 2 EFFERVESCENT",
-    "50G TEA OF RS. 500",
-    "HOT CHOCOLATE TEA",
+      "SITEWIDE",
+      "BUYFREE",
+      "PURCHASE",
+      "EFFERVESCENT",
+      "50GTEARS",
+      "HOTCHOCOLATE",
     ];
     const defaultColors = ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"];
+    const defaultFontColor = "#000000";
   
     // Reset the items and colors
     setItems(defaultItems);
     setColors(defaultColors);
+    setFontColor(defaultFontColor);
   
     // Store the defaults in localStorage correctly
     window.localStorage.setItem("itemsList", JSON.stringify(defaultItems));
     window.localStorage.setItem("colorsList", JSON.stringify(defaultColors));
+    window.localStorage.setItem("fontColor", "#000000");
   };
 
   // Remove item from the list
