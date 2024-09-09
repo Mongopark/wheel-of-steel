@@ -165,7 +165,7 @@ const postSpinRecord = async (item,color,user_id) => {
   setIsLoading(true);
   setErrorMessage(null);
   try {
-    const response = await axios.post("http://localhost:8000/api/spin/create", {
+    const response = await axios.post("https://yourlinkapp.vercel.app/api/spin/create", {
       title: item,
       color,
       user_id, // Sending the foreign key
@@ -186,7 +186,7 @@ const getUserSpinRecords = async () => {
   setErrorMessage(null);
   try {
     console.log(userData._id);
-    const response = await axios.get(`http://localhost:8000/api/spin/get/${userData._id}`);
+    const response = await axios.get(`https://yourlinkapp.vercel.app/api/spin/get/${userData._id}`);
     const spinData = response.data.spinRecords;  // Extract the data from the response
     window.localStorage.setItem('spinrecords', JSON.stringify(spinData));  // Save only the data part
     setSpinRecords(spinData);  // Update state with the correct data

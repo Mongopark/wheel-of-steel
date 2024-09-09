@@ -29,7 +29,7 @@ const Login = ({oldUser, setOldUser}) => {
     setIsLoading(true);
     setErrorMessage(null);
     try {
-      const response = await axios.post("http://localhost:8000/api/signin", {
+      const response = await axios.post("https://yourlinkapp.vercel.app/api/signin", {
         email,
         password: phone, // Sending phone as password
       });
@@ -140,7 +140,7 @@ const Register = ({oldUser, setOldUser}) => {
     setIsLoading(true);
     setErrorMessage(null);
     try {
-      const response = await axios.post("http://localhost:8000/api/signup", {
+      const response = await axios.post("https://yourlinkapp.vercel.app/api/signup", {
         name: username,
         email,
         password: phone, // Sending phone as password
