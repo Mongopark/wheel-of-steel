@@ -6,6 +6,7 @@ import { FaBullseye, FaCheckCircle, FaRegCheckCircle } from "react-icons/fa";
 import { FaCircleXmark, FaEye, FaEyeSlash, FaRegCircleXmark, FaRegEye } from "react-icons/fa6";
 import { SiTruenas } from "react-icons/si";
 import { useAuthStore } from "../store";
+import { toast } from 'react-toastify';
 
 
 
@@ -28,16 +29,18 @@ const Login = ({oldUser, setOldUser}) => {
     setIsLoading(true);
     setErrorMessage(null);
     try {
-      const response = await axios.post("https://yourlinkapp.vercel.app/api/signin", {
+      const response = await axios.post("http://localhost:8000/api/signin", {
         email,
         password: phone, // Sending phone as password
       });
       // Store user data in localStorage
       localStorage.setItem("userdata", JSON.stringify(response.data.user));
       handleLogin();
+      toast.success(response?.data?.message || 'Logged In Successfully')
       console.log(localStorage.getItem("userdata"));
     } catch (error) {
       setErrorMessage(error.response?.data?.message || "Login failed");
+      toast.error(error.response?.data?.message || "Login failed")
     } finally {
       setIsLoading(false);
     }
@@ -107,7 +110,8 @@ const Login = ({oldUser, setOldUser}) => {
                   type="submit"
                   className={`w-full flex justify-center ${isDisable || isLoading ?"bg-gray-400":"bg-gradient-to-r from-green-500 to-green-300  hover:bg-gradient-to-l hover:from-green-500 hover:to-green-600 cursor-pointer"} text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg transition ease-in duration-500`}
                 >
-                  Sign in{isLoading && <span className="loading loading-spinner"></span>}
+                  {isLoading  ? 'Signing in' : 'Sign in'}
+                  {isLoading && <span className="loading loading-spinner"></span>}
                 </button>
               <p className="mt-2 text-sm text-gray-500">
                 Don't have an account? <span onClick={()=> setOldUser(!oldUser)} className="text-green-600 cursor-pointer">Register here</span>
@@ -136,17 +140,18 @@ const Register = ({oldUser, setOldUser}) => {
     setIsLoading(true);
     setErrorMessage(null);
     try {
-      const response = await axios.post("https://yourlinkapp.vercel.app/api/signup", {
+      const response = await axios.post("http://localhost:8000/api/signup", {
         name: username,
         email,
         password: phone, // Sending phone as password
       });
       // Store user data in localStorage
       localStorage.setItem("userdata", JSON.stringify(response.data.user));     
-      handleLogin();
+      toast.success(`${response?.data?.message}, proceed to login` || 'Registered Successfully, proceed to login')
       console.log(localStorage.getItem("userdata"));
     } catch (error) {
       setErrorMessage(error.response?.data?.message || "Registration failed");
+      toast.error(error.response?.data?.message || "Registration failed");
     } finally {
       setIsLoading(false);
     }
@@ -235,7 +240,8 @@ useEffect(() => {
                   type="submit"
                   className={`w-full flex justify-center ${isDisable || isLoading ?"bg-gray-400":"bg-gradient-to-r from-green-500 to-green-300  hover:bg-gradient-to-l hover:from-green-500 hover:to-green-600 cursor-pointer"} text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg transition ease-in duration-500`}
                 >
-                  Register{isLoading && <span className="loading loading-spinner"></span>}
+                  {isLoading  ? 'Registering' : 'Register'}
+                  {isLoading && <span className="loading loading-spinner"></span>}
                 </button>
               <p className="mt-2 text-sm text-gray-500">
                 Already have an account? <span onClick={()=> setOldUser(!oldUser)} className="text-green-600 cursor-pointer">Login here</span>

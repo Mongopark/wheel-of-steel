@@ -1,13 +1,14 @@
 import "../index.css";
 import { React, useEffect, useState } from "react";
 import Wheel from "./Wheel";
-import { FaGear, FaGlobe, FaList, FaMap, FaMoon, FaRecordVinyl, FaSun, FaTimeline } from 'react-icons/fa6';
+import { FaGear, FaGlobe, FaList, FaMap, FaMoon, FaRecordVinyl, FaRotateLeft, FaRotateRight, FaSun, FaTimeline, FaX } from 'react-icons/fa6';
 import applaudSound from "../sounds/applaudSound.mp3";
 import { useNavigate } from 'react-router-dom';
 import useBreakpoint from './hooks/useBreakpoint';  // Adjust the path as necessary
 import profile from '../assets/profile.png'
 import { useAuthStore } from "../store";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 // import useWindowSize from 'react-use/lib/useWindowSize'
@@ -49,17 +50,17 @@ function Home() {
     const value = window.localStorage.getItem("itemsList");
     return value !== null ? JSON.parse(value) : [
       "30% SITEWIDE OFF",
-      "BUY 1 GET 2 FREE",
-      "FREE COFFEE MUG ON PURCHASE WORTH RS. 1000+",
-      "BUY 2 EFFERVESCENT TABLETS & GET 1 FREE",
-      "FREE 50G TEA ON PURCHASE OF RS. 500",
-      "HOT CHOCOLATE FREE WITH TEA",
+    "BUY 1 GET 1 FREE",
+    "PURCHASE WORTH 1000+",
+    "BUY 2 EFFERVESCENT",
+    "50G TEA OF RS. 500",
+    "HOT CHOCOLATE TEA",
     ];
   });
 
   const [colors, setColors] = useState(() => {
     const value = window.localStorage.getItem("colorsList");
-    return value !== null ? JSON.parse(value) : ["#d38c12", "#e67e22", "#f39c12", "#e74c3c", "#8e44ad", "#3498db"];
+    return value !== null ? JSON.parse(value) : ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"];
   });
 
   if (window.localStorage.getItem("duration") === null)
@@ -121,8 +122,9 @@ function Home() {
       }, window.localStorage.getItem("duration") * 1000);
 
       setTimeout(() => {
-        setWinners(winners.concat(items[selectedIndex]));
+        setWinners(winners.concat(items[selectedIndex]));               
 postSpinRecord(items[selectedIndex],colors[selectedIndex],userData._id);
+getUserSpinRecords();
         console.log('winners',items[selectedIndex]);
         console.log('colors', colors[selectedIndex]);
       }, window.localStorage.getItem("duration") * 1000);
@@ -163,13 +165,15 @@ const postSpinRecord = async (item,color,user_id) => {
   setIsLoading(true);
   setErrorMessage(null);
   try {
-    const response = await axios.post("https://yourlinkapp.vercel.app/api/spin/create", {
+    const response = await axios.post("http://localhost:8000/api/spin/create", {
       title: item,
       color,
       user_id, // Sending the foreign key
     });
+    toast.success(response?.data?.message||'Record Created Successfully'); 
   } catch (error) {
     setErrorMessage(error.response?.data?.message || "Record not Created and failed");
+    toast.error(error.response?.data?.message || "Record not Created and failed"); 
   } finally {
     setIsLoading(false);
   }
@@ -181,13 +185,16 @@ const getUserSpinRecords = async () => {
   setIsLoading(true);
   setErrorMessage(null);
   try {
-    const response = await axios.get(`https://yourlinkapp.vercel.app/api/spin/get/${userData._id}`);
+    console.log(userData._id);
+    const response = await axios.get(`http://localhost:8000/api/spin/get/${userData._id}`);
     const spinData = response.data.spinRecords;  // Extract the data from the response
     window.localStorage.setItem('spinrecords', JSON.stringify(spinData));  // Save only the data part
     setSpinRecords(spinData);  // Update state with the correct data
+    toast.info(response?.data?.message || 'Records retrieved successfully')
     console.log('spinrecords',spinRecords);
   } catch (error) {
     setErrorMessage(error.response?.data?.message || "Failed to fetch records");
+    toast.error(error.response?.data?.message || 'Unable to retrieve Records')
   } finally {
     setIsLoading(false);
   }
@@ -202,35 +209,36 @@ const getUserSpinRecords = async () => {
   }, [items, colors]);
 
   
-  useEffect(() => {
-    if (userData && userData._id) {
-      getUserSpinRecords();
-    }
-  });
+  // useEffect(() => {
+  //   if (userData && userData._id) {
+  //     getUserSpinRecords();
+  //   }
+  // });
+
 
 
   return (
-    <div className="bg-[rgb(199,249,242)]">
+    <div className="bg-[rgb(199, 249, 208)]">
         {openModal && confet && <Confetti />}
-        <div className="bg-[blue] p-1 flex justify-between p-6 md:p-6 lg:p-10 items-center sticky top-0 z-[10]">
-          <div className="text-md md:text-xl lg:text-3xl" onClick={()=>localStorage.clear()}>Wheel of Steel</div>
-          <div className="text-sm md:text-md flex items-center cursor-pointer" onClick={() => {}}>
-          {!isMobile && 
-          <span className="flex" onClick={() => document.getElementById("my_modal_1").showModal()}>Settings
-          <FaGear
-        className="text-[red] text-lg md:text-2xl me-5"
-        /></span>}
+        <div className="bg-gradient-to-t from-green-600 to-green-400 flex justify-between p-2 md:px-4 lg:px-10 items-center sticky top-0 z-[10]">
+          <div className="font-black text-white text-md md:text-xl lg:text-3xl" onClick={()=>localStorage.clear()}>Wheel of Steel</div>
+          <div className="text-sm md:text-md flex items-center cursor-pointer font-bold text-white" onClick={() => {}}>          
+          <span className="flex" onClick={() => document.getElementById("my_modal_1").showModal()}>
+          {!isMobile && 'Settings'}
+          <FaGear onClick={() => document.getElementById("my_modal_1").showModal()}
+        className="text-white text-xl md:text-2xl me-5"
+        /></span>
       {!isMobile && 'Layout'}
       {!isMobile && <input
   type="checkbox"
-  className="toggle border-blue-500 bg-blue-500 [--tglbg:yellow] hover:bg-blue-700 me-5"
+  className="toggle border-green-400 bg-green-600 [--tglbg:rgb(199, 249, 208)] hover:bg-green-700 me-5"
   checked={openModal}
   onChange={(toggleModal)}
 />
 }
       {!isMobile && <span className="flex cursor-pointer" onClick={handleUserLogout}>
       Logout
-      <PiSignOut className="text-[red] text-lg md:text-2xl me-5" />
+      <PiSignOut className="font-black text-lg md:text-2xl me-5" />
       </span>}
       
       {!isMobile && (userData.name || 'Username')}
@@ -238,7 +246,7 @@ const getUserSpinRecords = async () => {
     <div className="dropdown dropdown-end">
     {isMobile ?<div tabIndex={0} role="button" className="">
       <FaBars
-        className="text-[red] text-2xl md:text-2xl me-5"
+        className="text-white text-2xl md:text-2xl me-5 mt-2 md: mt-0"
         />
       </div>:
         <div tabIndex={0} role="button" className="bg-white rounded-full btn btn-ghost rounded btn-circle">
@@ -253,14 +261,14 @@ const getUserSpinRecords = async () => {
         <img src={profile} className="card-img img-fluid rounded rounded-[100px]"  alt="" />
         </div>
         <div>
-          <div className="text-lg font-bold flex justify-center">{userData?.name || "Unknown"}</div>
-          <div className="text-info flex justify-center">{userData?.email || "email"}</div>
+          <div className="text-lg font-bold flex justify-center text-black">{userData?.name || "Unknown"}</div>
+          <div className="text-green-400 flex justify-center">{userData?.email || "email"}</div>
           </div>
           </div>
           <div className="card-actions">
-          <button className={`btn rounded-[0px] justify-between w-72 ${isCopied?'btn-info':'btn-ghost'}`} onClick={toggleModal}><FaGlobe /><span>{openModal? 'Close Layout': 'Open Layout'}</span><span> </span></button>
-            <button className={`btn rounded-[0px] justify-between w-72 ${isCopied?'btn-info':'btn-ghost'}`} onClick={handleOpenHistory}><FaList /><span>History</span><span> </span></button>
-            <button className="btn rounded-[0px] btn-ghost justify-between w-full" onClick={handleUserLogout}><PiSignOut /><label className="" htmlFor="my_modal_6"><span>Logout</span><span> </span></label><span> </span></button>
+          <button className={`btn rounded-[0px] justify-between w-72 text-black ${isCopied?'btn-info':'btn-ghost'}`} onClick={toggleModal}><FaGlobe /><span>{openModal? 'Close Layout': 'Open Layout'}</span><span> </span></button>
+            <button className={`btn rounded-[0px] justify-between w-72 text-black ${isCopied?'btn-info':'btn-ghost'}`} onClick={handleOpenHistory}><FaList /><span>History</span><span> </span></button>
+            <button className="btn rounded-[0px] btn-ghost justify-between w-full text-black" onClick={handleUserLogout}><PiSignOut /><label className="" htmlFor="my_modal_6"><span>Logout</span><span> </span></label><span> </span></button>
           </div>
         </div>
       </div>
@@ -281,10 +289,10 @@ const getUserSpinRecords = async () => {
         setColors={setColors}
       />
       <section
-        className="relative min-h-screen justify-evenly align-middle lg:flex md:flex-row sm:flex flex-row"
+        className="relative min-h-screen justify-evenly align-middle lg:flex md:flex-row sm:flex-row flex-row"
         style={{
           alignItems: "center",
-          backgroundColor: "rgb(199,249,242)",
+          backgroundColor: "rgb(199, 249, 208)",
         }}
       >
         <Wheel
@@ -296,7 +304,7 @@ const getUserSpinRecords = async () => {
           colors={colors}
         />
         {openModal && (
-          <div className="bg-gradient-to-t from-green-600 to-green-400  h-1/2  sm:w-full md:w-1/2 lg:w-1/2 rounded-md my-3">
+          <div className="bg-gradient-to-t from-green-600 to-green-400  h-1/2  sm:w-full md:w-full lg:w-1/2 rounded-md my-3">
           <div className="justify-between flex"><span className={`border-4 border-green-600 ${layout==='winner'&&'bg-green-600 text-white'} rounded-tl-lg p-4 w-full hover:bg-green-500 cursor-pointer font-bold text-center`} onClick={()=>setLayout('winner')}>winner</span> <span className={`border-4 border-green-600 ${layout==='history'&&'bg-green-600 text-white'} p-4 w-full hover:bg-green-500 cursor-pointer font-bold text-center`} onClick={()=>setLayout('history')}>History</span> <span className={`border-4 border-green-600 ${layout==='setting'&&'bg-green-600 text-white'} rounded-tr-lg p-4 w-full hover:bg-green-500 cursor-pointer font-bold text-center`} onClick={()=>setLayout('setting')}>Setting</span></div>
             {layout === 'winner' ? <div
               className="p-10 flex flex-col justify-center font-bold"
@@ -335,21 +343,25 @@ const getUserSpinRecords = async () => {
                 </div>
               )}
             </div>:layout === 'history' ? <div
-              className="py-10 px-2 flex flex-col justify-center font-bold"
+              className="pb-10 pt-4 px-2 flex flex-col justify-center font-bold"
               style={{ alignItems: "" }}
-            >              
+            >           
+            <div className="justify-center items-center w-full flex cursor-pointer" onClick={getUserSpinRecords}> 
+              Reload
+            <FaRotateLeft className="center"/>
+            </div>  
               {spinRecords?.map((item, index)=> {
                 const color = item.color;
                 return (
                 <div key={index} className="justify-between flex">
-                  <span>{index + 1}. </span>
+                  <span className="text-[10px] md:text-sm">{index + 1}. </span>
                   <span><span style={{backgroundColor: color}} className={`border border-3xl rounded rounded-[50px] px-3 bg-[${color}]`}></span>
-                <span className="text-[10px] font-black text-center">{item.title}</span></span>
-                <span className="text-[10px] text-center pt-2 font-normal">{getDateString(item.createdAt)}</span>
+                <span className="text-[10px] md:text-[12px] font-black text-center">{item.title}</span></span>
+                <span className="text-[10px] md:text-[12px] text-center pt-2 font-normal">{getDateString(item.createdAt)}</span>
                 </div>
                 )})}
             </div>:layout === 'setting' ? <div
-            className="p-10 flex flex-col justify-center font-bold"
+            className="pb-10 pt-0 px-10 flex flex-col justify-center font-bold"
             style={{ alignItems: "center" }}
           >
             <Setting
@@ -386,6 +398,27 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
     }
   };
 
+  const resetAll = () => {
+    const defaultItems = [
+      "30% SITEWIDE OFF",
+    "BUY 1 GET 1 FREE",
+    "PURCHASE WORTH 1000+",
+    "BUY 2 EFFERVESCENT",
+    "50G TEA OF RS. 500",
+    "HOT CHOCOLATE TEA",
+    ];
+    const defaultColors = ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"];
+  
+    // Reset the items and colors
+    setItems(defaultItems);
+    setColors(defaultColors);
+  
+    // Store the defaults in localStorage correctly
+    window.localStorage.setItem("itemsList", JSON.stringify(defaultItems));
+    window.localStorage.setItem("colorsList", JSON.stringify(defaultColors));
+  };
+
+
   // Remove item from the list
   const removeItem = (index) => {
     if (items.length<=2){
@@ -409,11 +442,21 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
     setFontColor(window.localStorage.getItem("fontColor"))
   };
 
+  // Handle modal close
+  const closeModal = () => {
+    document.getElementById("my_modal_1").close();  // Close the modal using the dialog's close method
+  };
+
   return (
     <dialog id="my_modal_1" className="modal">
       <form method="dialog" className="modal-box">
+      {/* Close button at the top */}
+      <span className="modal-action cursor-pointer" onClick={closeModal}>
+          <FaX className="bg-[red] text-white rounded-full p-1 text-xl" style={{ stroke: "white", strokeWidth: 2 }} />
+        </span>
+
       <h3 className="font-bold text-lg">Edit Wheel Contents</h3>
-        <li key={0} className="flex justify-end items-center my-2">
+        <li key={0} className="flex justify-end items-center my-2 font-bold">
               <span>Wheel Theme</span>
               <input
                 type="color"
@@ -423,15 +466,16 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
             </li>
         <ul>
           {items.map((item, index) => (
-            <li key={index} className="flex justify-between items-center my-2">
-              <span>{item}</span>
+            <li key={index} className="flex justify-between items-center">
+              <span className="text-[12px] md:text-sm w-1/2 my-0 md:my-2">{item}</span>
               <input
                 type="color"
                 value={colors[index]}
                 onChange={(e) => updateColor(index, e.target.value)}
+                className="w-1/12 md:text-lg"
               />
               <button
-                className="ml-2 bg-red-500 text-white px-2 py-1 rounded"
+                className="ml-2 bg-red-500 text-white px-2 py-1 rounded text-[10px] md:text-sm"
                 onClick={() => removeItem(index)}
               >
                 Remove
@@ -444,7 +488,7 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
           placeholder="Add new item"
-          className="input input-bordered w-full my-2"
+          className="input input-bordered w-full mb-1"
         />
         <div className="justify-between flex">
         <button
@@ -456,14 +500,11 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
         </button>
               <button
                 className="bg-black text-white px-4 py-2 rounded"
-                // onClick={() => removeItem(index)}
+                onClick={resetAll}
               >
                 Reset All
               </button>
               </div>
-        <div className="modal-action">
-          <button className="btn">Close</button>
-        </div>
       </form>
     </dialog>
   );
@@ -482,6 +523,27 @@ function Setting({ items, setItems, wheelColor, setWheelColor, fontColor, setFon
       setColors([...colors, "#d38c12"]); // Add a default color for the new item
       setNewItem("");
     }
+  };
+
+
+  const resetAll = () => {
+    const defaultItems = [
+      "30% SITEWIDE OFF",
+    "BUY 1 GET 1 FREE",
+    "PURCHASE WORTH 1000+",
+    "BUY 2 EFFERVESCENT",
+    "50G TEA OF RS. 500",
+    "HOT CHOCOLATE TEA",
+    ];
+    const defaultColors = ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"];
+  
+    // Reset the items and colors
+    setItems(defaultItems);
+    setColors(defaultColors);
+  
+    // Store the defaults in localStorage correctly
+    window.localStorage.setItem("itemsList", JSON.stringify(defaultItems));
+    window.localStorage.setItem("colorsList", JSON.stringify(defaultColors));
   };
 
   // Remove item from the list
@@ -512,7 +574,7 @@ function Setting({ items, setItems, wheelColor, setWheelColor, fontColor, setFon
     <div className="container">
       <form method="" className="container">
       <h3 className="font-bold text-lg">Edit Wheel Contents</h3>
-        <li key={0} className="flex justify-end items-center my-2">
+        <li key={0} className="flex justify-end items-center my-2 font-bold">
               <span>Wheel Theme</span>
               <input
                 type="color"
@@ -521,16 +583,17 @@ function Setting({ items, setItems, wheelColor, setWheelColor, fontColor, setFon
               />
             </li>
         <ul>
-          {items.map((item, index) => (
-            <li key={index} className="flex justify-between items-center my-2">
-              <span>{item}</span>
+        {items.map((item, index) => (
+            <li key={index} className="flex justify-between items-center">
+              <span className="text-[12px] md:text-sm w-1/2 my-0 md:my-2">{item}</span>
               <input
                 type="color"
                 value={colors[index]}
                 onChange={(e) => updateColor(index, e.target.value)}
+                className="w-1/12 md:text-lg"
               />
               <button
-                className="ml-2 bg-red-500 text-white px-2 py-1 rounded"
+                className="ml-2 bg-red-500 text-white px-2 py-1 rounded text-[10px] md:text-sm"
                 onClick={() => removeItem(index)}
               >
                 Remove
@@ -555,14 +618,11 @@ function Setting({ items, setItems, wheelColor, setWheelColor, fontColor, setFon
         </button>
               <button
                 className="bg-black text-white px-4 py-2 rounded"
-                // onClick={() => removeItem(index)}
+                onClick={resetAll}
               >
                 Reset All
               </button>
               </div>
-        <div className="modal-action">
-          <button className="btn">Close</button>
-        </div>
       </form>
     </div>
   );

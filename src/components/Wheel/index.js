@@ -109,10 +109,10 @@ Wheel.defaultProps = {
   items: [
     "30% SITEWIDE OFF",
     "BUY 1 GET 1 FREE",
-    "FREE COFFEE MUG ON PURCHASE WORTH 1000+",
-    "BUY 2 EFFERVESCENT TABLETS & GET 1 FREE",
-    "FREE 50G TEA ON PURCHASE OF RS. 500",
-    "HOT CHOCOLATE FREE WITH TEA",
+    "PURCHASE WORTH 1000+",
+    "BUY 2 EFFERVESCENT",
+    "50G TEA OF RS. 500",
+    "HOT CHOCOLATE TEA",
   ],
-  colors: ["#d38c12", "#e67e22", "#f39c12", "#e74c3c", "#8e44ad", "#3498db"], // Default colors
+  colors: ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"], // Default colors
 };

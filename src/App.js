@@ -5,11 +5,12 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
  return ( 
+  <>
   <BrowserRouter>  
-  <ToastContainer />
   <Routes />
   </BrowserRouter>
-
+  <ToastContainer style={{zIndex: 9999}}/>
+  </>
  )
 }
 
