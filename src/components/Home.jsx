@@ -411,12 +411,14 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
   // Add new item to the list
   const addItem = () => {
     if (newItem.trim()) {
-      if (newItem.length <= 8) { // Check if the length is 8 or less
+      if (newItem.length <= 8 && items.length < 7) { // Check if the length is 8 or less
         setItems([...items, newItem.trim()]);
         setColors([...colors, "#d38c12"]); // Add a default color for the new item
         setNewItem("");
-      } else {
+      } else if (newItem.length>8){
         alert("Maximum of 8 characters allowed.");
+      } else {
+        alert("Maximum of 8 Items allowed.");
       }
     }
   };
@@ -447,8 +449,8 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
 
   // Remove item from the list
   const removeItem = (index) => {
-    if (items.length<=2){
-      alert('minimum value is 2')
+    if (items.length<=4){
+      alert('minimum number of items is 4')
     } else {
     setItems(items.filter((_, i) => i !== index));
     setColors(colors.filter((_, i) => i !== index));
@@ -545,9 +547,15 @@ function Setting({ items, setItems, wheelColor, setWheelColor, fontColor, setFon
   // Add new item to the list
   const addItem = () => {
     if (newItem.trim()) {
-      setItems([...items, newItem.trim()]);
-      setColors([...colors, "#d38c12"]); // Add a default color for the new item
-      setNewItem("");
+      if (newItem.length <= 8 && items.length < 7) { // Check if the length is 8 or less
+        setItems([...items, newItem.trim()]);
+        setColors([...colors, "#d38c12"]); // Add a default color for the new item
+        setNewItem("");
+      } else if (newItem.length>8){
+        alert("Maximum of 8 characters allowed.");
+      } else {
+        alert("Maximum of 8 Items allowed.");
+      }
     }
   };
 
@@ -575,10 +583,10 @@ function Setting({ items, setItems, wheelColor, setWheelColor, fontColor, setFon
     window.localStorage.setItem("fontColor", "#000000");
   };
 
-  // Remove item from the list
+  // Remove item from the list  
   const removeItem = (index) => {
-    if (items.length<=2){
-      alert('minimum value is 2')
+    if (items.length<=4){
+      alert('minimum number of items is 4')
     } else {
     setItems(items.filter((_, i) => i !== index));
     setColors(colors.filter((_, i) => i !== index));
