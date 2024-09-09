@@ -46,10 +46,12 @@ const Login = ({oldUser, setOldUser}) => {
     }
   };
 
+  
+
   useEffect(() => {
     // Validate email and password (password must have at least 8 characters, including a capital letter, a small letter, a symbol, and a number)
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(phone);
+    const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}$/.test(phone); 
     
     setIsDisable(!(emailValid && passwordValid));
   }, [email, phone]);
@@ -157,13 +159,14 @@ const Register = ({oldUser, setOldUser}) => {
     }
   };
 
-useEffect(() => {
+  useEffect(() => {
     // Validate email, username, and password (password must have at least 8 characters, including a capital letter, a small letter, a symbol, and a number)
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const usernameValid = username?.length > 0;
-    const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(phone);    
+    const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}$/.test(phone);    
     setIsDisable(!(emailValid && usernameValid && passwordValid));
   }, [email, username, phone]);
+
 
   return (
         <div className="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full  xl:w-2/5 p-8  md:p-10 lg:p-14 sm:rounded-lg md:rounded-none bg-white">
