@@ -52,9 +52,9 @@ function Home() {
       "SITEWIDE",
       "BUYFREE",
       "PURCHASE",
-      "EFFERVESCENT",
+      "LIGHT",
       "50GTEARS",
-      "HOTCHOCOLATE",
+      "BOTCHED",
     ];
   });
 
@@ -411,9 +411,13 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
   // Add new item to the list
   const addItem = () => {
     if (newItem.trim()) {
-      setItems([...items, newItem.trim()]);
-      setColors([...colors, "#d38c12"]); // Add a default color for the new item
-      setNewItem("");
+      if (newItem.length <= 8) { // Check if the length is 8 or less
+        setItems([...items, newItem.trim()]);
+        setColors([...colors, "#d38c12"]); // Add a default color for the new item
+        setNewItem("");
+      } else {
+        alert("Maximum of 8 characters allowed.");
+      }
     }
   };
 
@@ -422,9 +426,9 @@ function Modal({ items, setItems, wheelColor, setWheelColor, fontColor, setFontC
       "SITEWIDE",
       "BUYFREE",
       "PURCHASE",
-      "EFFERVESCENT",
+      "LIGHT",
       "50GTEARS",
-      "HOTCHOCOLATE",
+      "BOTCHED",
     ];
     const defaultColors = ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"];  
     const defaultFontColor = "#000000";
@@ -553,9 +557,9 @@ function Setting({ items, setItems, wheelColor, setWheelColor, fontColor, setFon
       "SITEWIDE",
       "BUYFREE",
       "PURCHASE",
-      "EFFERVESCENT",
+      "LIGHT",
       "50GTEARS",
-      "HOTCHOCOLATE",
+      "BOTCHED",
     ];
     const defaultColors = ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"];
     const defaultFontColor = "#000000";

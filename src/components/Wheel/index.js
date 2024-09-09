@@ -85,8 +85,7 @@ const magicNumber = items.length>6?1:items.length===6?1.1:items.length===5?1.1:i
                  "font-weight": "bold", 
                   backgroundColor: colors[index] || "#d38c12", // Use the color from the colors array or a default color
                   "--nb-value": 30* magicNumber /items.length,
-                  "--neutral-color": "black",
-                  "--mis-fit": 50
+                  "--neutral-color": "black"
                 }}
               >
                 {item}
@@ -111,9 +110,9 @@ Wheel.defaultProps = {
     "SITEWIDE",
     "BUYFREE",
     "PURCHASE",
-    "EFFERVESCENT",
+    "LIGHT",
     "50GTEARS",
-    "HOTCHOCOLATE",
+    "BOTCHED",
   ],
   colors: ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00"], // Default colors
 };
