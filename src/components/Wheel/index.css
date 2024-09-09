@@ -313,7 +313,7 @@
   transform-origin: center left;
   transform: translateY(-50%) rotate(calc(var(--item-nb) * (360deg / var(--nb-item))));  
   text-align: right;
-  padding: calc(var(--mis-fit) + var(--nb-item) * 1px) 25px 0 calc(var(--good-fit) - var(--nb-item) * 1px);
+  padding: calc(var(--mis-fit) * 1px) 25px 0 calc(var(--good-fit) * 1px);
   font-family: var(--wheel-font);
   font-size: var(--font-size);  
   height: calc(11% * var(--nb-value));
