@@ -70,7 +70,7 @@ function Home() {
     localStorage.setItem("wheelColor", "#E50303");
 
   if (window.localStorage.getItem("fontColor") === null)
-    localStorage.setItem("fontColor", "#FFFFFF");
+    localStorage.setItem("fontColor", "#000000");
 
   function checkCoupon() {
     if (visibility===false){

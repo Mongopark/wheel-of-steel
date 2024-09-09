@@ -58,7 +58,7 @@ const magicNumber = items.length>6?1:items.length===6?1.1:items.length===5?1.1:i
     cssProperties["--neutral-color"] = `${this.props.fontColor}`;
 
     if (cssProperties["--neutral-color"] === "null")
-      cssProperties["--neutral-color"] = "#FFFFFF";
+      cssProperties["--neutral-color"] = "#000000";
 
     return (
       <div style={cssProperties}>

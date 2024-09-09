@@ -2,11 +2,11 @@
 @media only screen and (max-width: 400px) {
   :root {
     --wheel-font: "Lato", "Quicksand", sans-serif;
-    --wheel-size: 200px;
+    --wheel-size: 350px;
     --wheel-slice-spacing: 25px;
     --wheel-border-size: 5px;
     --wheel-color: green;
-    --neutral-color: white;
+    --neutral-color: black;
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
@@ -26,7 +26,7 @@
     --wheel-slice-spacing: 25px;
     --wheel-border-size: 5px;
     --wheel-color: green;
-    --neutral-color: white;
+    --neutral-color: black;
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
@@ -46,7 +46,7 @@
     --wheel-slice-spacing: 30px;
     --wheel-border-size: 5px;
     --wheel-color: green;
-    --neutral-color: white;
+    --neutral-color: black;
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
@@ -66,7 +66,7 @@
     --wheel-slice-spacing: 30px;
     --wheel-border-size: 5px;
     --wheel-color: green;
-    --neutral-color: white;
+    --neutral-color: black;
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
@@ -86,7 +86,7 @@
     --wheel-slice-spacing: 35px;
     --wheel-border-size: 5px;
     --wheel-color: green;
-    --neutral-color: white;
+    --neutral-color: black;
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
@@ -105,7 +105,7 @@
     --wheel-slice-spacing: 35px;
     --wheel-border-size: 5px;
     --wheel-color: green;
-    --neutral-color: white;
+    --neutral-color: black;
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
@@ -128,7 +128,7 @@
     --wheel-slice-spacing: 50px;
     --wheel-border-size: 5px;
     --wheel-color: green;
-    --neutral-color: white;
+    --neutral-color: black;
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
@@ -150,7 +150,7 @@
     --wheel-slice-spacing: 50px;
     --wheel-border-size: 5px;
     --wheel-color: green;
-    --neutral-color: white;
+    --neutral-color: black;
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
@@ -169,7 +169,7 @@
     --wheel-slice-spacing: 50px;
     --wheel-border-size: 5px;
     --wheel-color: green;
-    --neutral-color: white;
+    --neutral-color: black;
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
@@ -188,7 +188,7 @@
     --wheel-slice-spacing: 50px;
     --wheel-border-size: 5px;
     --wheel-color: green;
-    --neutral-color: white;
+    --neutral-color: black;
     --PI: 3.14159265358979;
     --nb-item: 0;
     --nb-value: 0;
