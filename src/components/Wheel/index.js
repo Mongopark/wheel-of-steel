@@ -85,7 +85,8 @@ const magicNumber = items.length>6?1:items.length===6?1.1:items.length===5?1.1:i
                  "font-weight": "bold", 
                   backgroundColor: colors[index] || "#d38c12", // Use the color from the colors array or a default color
                   "--nb-value": 30* magicNumber /items.length,
-                  "--neutral-color": "black"
+                  "--neutral-color": "black",
+                  "--mis-fit": 50
                 }}
               >
                 {item}

@@ -124,7 +124,7 @@ function Home() {
       setTimeout(() => {
         setWinners(winners.concat(items[selectedIndex]));               
 postSpinRecord(items[selectedIndex],colors[selectedIndex],userData._id);
-getUserSpinRecords();
+getUserSpinRecord();
         console.log('winners',items[selectedIndex]);
         console.log('colors', colors[selectedIndex]);
       }, window.localStorage.getItem("duration") * 1000);
@@ -180,6 +180,23 @@ const postSpinRecord = async (item,color,user_id) => {
 };
 
 
+const getUserSpinRecord = async () => {
+  setIsLoading(true);
+  setErrorMessage(null);
+  try {
+    console.log(userData._id);
+    const response = await axios.get(`https://yourlinkapp.vercel.app/api/spin/get/${userData._id}`);
+    const spinData = response.data.spinRecords;  // Extract the data from the response
+    window.localStorage.setItem('spinrecords', JSON.stringify(spinData));  // Save only the data part
+    setSpinRecords(spinData);  // Update state with the correct data
+    console.log('spinrecords',spinRecords);
+  } catch (error) {
+    setErrorMessage(error.response?.data?.message || "Failed to fetch records");
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
 const getUserSpinRecords = async () => {
   setIsLoading(true);
@@ -221,7 +238,9 @@ const getUserSpinRecords = async () => {
     <div className="bg-[rgb(199, 249, 208)]">
         {openModal && confet && <Confetti />}
         <div className="bg-gradient-to-t from-green-600 to-green-400 flex justify-between p-2 md:px-4 lg:px-10 items-center sticky top-0 z-[10]">
-          <div className="font-black text-white text-md md:text-xl lg:text-3xl" onClick={()=>localStorage.clear()}>Wheel of Steel</div>
+          <div className="font-black text-white text-md md:text-xl lg:text-3xl" onClick={()=>{
+            // localStorage.clear()
+          }}>Wheel of Steel</div>
           <div className="text-sm md:text-md flex items-center cursor-pointer font-bold text-white" onClick={() => {}}>          
           <span className="flex" onClick={() => document.getElementById("my_modal_1").showModal()}>
           {!isMobile && 'Settings'}
